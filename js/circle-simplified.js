@@ -19,9 +19,9 @@ const circleZ = -10
 const radius = 2.5
 const disturbanceAmp = radius // * .8 // 2
 const increment = 1
-const numOfCirclePoints = 500
+const numOfCirclePoints = 250 // 500
 const curvePoints = 10000
-const material = new THREE.LineBasicMaterial( { color : 0xffffff } );
+const material = new THREE.LineBasicMaterial( { color : 0xaaaaaa } );
 
 const timeIncrement = Math.PI / 180
 let time = 0
@@ -44,9 +44,9 @@ let renderCount = 0
 
 const generateCircle = () => {
 
-    renderCount++
-    if (renderCount < renderedThrottle) return 
-    renderCount = renderCount % renderedThrottle
+    // renderCount++
+    // if (renderCount < renderedThrottle) return 
+    // renderCount = renderCount % renderedThrottle
 
     scene.remove( curve )
 
