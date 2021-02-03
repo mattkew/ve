@@ -37,11 +37,14 @@ const circle = () => [...new Array(numOfCirclePoints)].map( (_, i) => {
     )
 })
 
-let rendered = false
+let renderedThrottle = 100
+let renderCount = 0
 
 const generateCircle = () => {
 
-    if (rendered) return 
+    renderCount++
+    if (renderCount < renderedThrottle) return 
+    renderCount = renderCount % renderedThrottle
 
     scene.remove( curve )
 
@@ -52,8 +55,6 @@ const generateCircle = () => {
     curve = new THREE.Line( geometry, material );
 
     scene.add( curve );
-
-    rendered = true
 }
 
 const animate = function () {
