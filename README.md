@@ -1,2 +1,2 @@
 # ve
-visual experiments site
+visual experiments site for personal exploration
