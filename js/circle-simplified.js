@@ -36,7 +36,12 @@ const circle = () => [...new Array(numOfCirclePoints)].map( (_, i) => {
     )
 })
 
+let rendered = false
+
 const generateCircle = () => {
+
+    if (rendered) return 
+
     scene.remove( splineObject )
 
     let circlePoints = circle()
@@ -46,6 +51,8 @@ const generateCircle = () => {
     splineObject = new THREE.Line( geometry, material );
 
     scene.add( splineObject );
+
+    rednered = true
 }
 
 const animate = function () {
