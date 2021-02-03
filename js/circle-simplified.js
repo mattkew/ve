@@ -52,7 +52,7 @@ const generateCircle = () => {
 
     scene.add( splineObject );
 
-    rednered = true
+    rendered = true
 }
 
 const animate = function () {
