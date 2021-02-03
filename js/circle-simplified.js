@@ -22,7 +22,7 @@ const curvePoints = 10000
 const material = new THREE.LineBasicMaterial( { color : 0xffffff } );
 
 let time = 0
-let splineObject
+let curve
 
 const signedRandom = (amp) => (Math.random() * amp) - (amp / 2)
 
@@ -32,7 +32,7 @@ const circle = () => [...new Array(numOfCirclePoints)].map( (_, i) => {
     return new THREE.Vector3(
         Math.sin(v) * disturbance, 
         Math.cos(v) * disturbance, 
-        Math.sin(v * 0.35)
+        Math.sin(v * 0.35) * disturbance
     )
 })
 
@@ -42,15 +42,15 @@ const generateCircle = () => {
 
     if (rendered) return 
 
-    scene.remove( splineObject )
+    scene.remove( curve )
 
     let circlePoints = circle()
-    let curve = new THREE.SplineCurve( circlePoints );
+    let curve = new THREE.CatmullRomCurve3( circlePoints );
     let points = curve.getPoints( curvePoints ); // let points = curve.getPoints( numOfCirclePoints * curvePoints );
     let geometry = new THREE.BufferGeometry().setFromPoints( points );
-    splineObject = new THREE.Line( geometry, material );
+    curve = new THREE.Line( geometry, material );
 
-    scene.add( splineObject );
+    scene.add( curve );
 
     rendered = true
 }
