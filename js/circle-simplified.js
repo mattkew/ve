@@ -2,7 +2,8 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js'; // impor
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.z = 5;
+camera.position.z = 10;
+camera.position.y = -5;
 
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -32,7 +33,7 @@ const circle = () => [...new Array(numOfCirclePoints)].map( (_, i) => {
     return new THREE.Vector3(
         Math.sin(v) * disturbance, 
         Math.cos(v) * disturbance, 
-        Math.sin(v * 0.35) * disturbance
+        Math.sin(v * 0.35) * disturbance * 0.25
     )
 })
 
