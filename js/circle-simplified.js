@@ -45,7 +45,7 @@ const generateCircle = () => {
     scene.remove( curve )
 
     let circlePoints = circle()
-    let curve = new THREE.CatmullRomCurve3( circlePoints );
+    curve = new THREE.CatmullRomCurve3( circlePoints );
     let points = curve.getPoints( curvePoints ); // let points = curve.getPoints( numOfCirclePoints * curvePoints );
     let geometry = new THREE.BufferGeometry().setFromPoints( points );
     curve = new THREE.Line( geometry, material );
