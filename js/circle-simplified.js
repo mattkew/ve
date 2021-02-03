@@ -37,7 +37,7 @@ const circle = () => [...new Array(numOfCirclePoints)].map( (_, i) => {
     )
 })
 
-let renderedThrottle = 100
+let renderedThrottle = 20
 let renderCount = 0
 
 const generateCircle = () => {
