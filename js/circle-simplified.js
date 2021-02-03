@@ -2,8 +2,7 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js'; // impor
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.z = 10;
-camera.position.y = -5;
+camera.position.z = 0;
 
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -14,7 +13,9 @@ import { VRButton } from './VRButton.js';
 document.body.appendChild( VRButton.createButton( renderer ) );
 renderer.xr.enabled = true;
 
-const timeFactor = Math.PI / 180
+const circleY = 5
+const circleZ = -10
+
 const radius = 2.5
 const disturbanceAmp = radius // * .8 // 2
 const increment = 1
@@ -22,6 +23,7 @@ const numOfCirclePoints = 500
 const curvePoints = 10000
 const material = new THREE.LineBasicMaterial( { color : 0xffffff } );
 
+const timeIncrement = Math.PI / 180
 let time = 0
 let curve
 
@@ -32,8 +34,8 @@ const circle = () => [...new Array(numOfCirclePoints)].map( (_, i) => {
     let disturbance = radius + signedRandom(disturbanceAmp * (i / numOfCirclePoints))
     return new THREE.Vector3(
         Math.sin(v) * disturbance, 
-        Math.cos(v) * disturbance, 
-        Math.sin(v * 0.35) * disturbance * 0.25
+        (Math.cos(v) * disturbance) + circleY, 
+        (Math.sin(v * 0.35) * disturbance * 0.25) + circleZ
     )
 })
 
@@ -62,7 +64,7 @@ const animate = function () {
 };
 
 const render = function() {
-    time = (time + timeFactor) % Math.PI
+    time = (time + timeIncrement) % Math.PI
     generateCircle()
     renderer.render( scene, camera );
 }
