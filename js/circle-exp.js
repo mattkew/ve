@@ -14,7 +14,7 @@ document.body.appendChild( VRButton.createButton( renderer ) );
 renderer.xr.enabled = true;
 
 const circleY = 0 // 5
-const circleZ = -3
+const circleZ = -2
 
 const radius = 2.5
 const modAmp = .0005 // radius // * .8 // 2
