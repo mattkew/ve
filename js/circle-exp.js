@@ -13,8 +13,8 @@ import { VRButton } from './VRButton.js';
 document.body.appendChild( VRButton.createButton( renderer ) );
 renderer.xr.enabled = true;
 
-const circleY = 0 // 5
-const circleZ = -2
+const circleY = 2
+const circleZ = -1.5
 
 const radius = 2.5
 const modAmp = .0005 // radius // * .8 // 2
@@ -35,7 +35,7 @@ const baseCircle = [...new Array(numOfCirclePts)].map( (_, i) => {
     let v = i * increment
     return new THREE.Vector3(
         Math.sin(v), 
-        Math.cos(v), // + circleY, 
+        Math.cos(v)+ circleY, 
         circleZ
     )
 })
