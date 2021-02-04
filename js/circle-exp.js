@@ -21,7 +21,7 @@ const modAmp = .0005 // radius // * .8 // 2
 const increment = Math.PI / 4.0
 const numOfCirclePts = 500 // 250 // 500
 const curvePts = 10000
-const material = new THREE.LineBasicMaterial( { color : 0xFFFFFF } );
+const material = new THREE.LineBasicMaterial( { color : 0x555555 } );
 let curve
 
 const modRate = Math.PI / 180
@@ -47,7 +47,7 @@ const circle = () => baseCircle.map( (vec3, i) => {
     return new THREE.Vector3(
         vec3.x + disturbance1, 
         vec3.y + disturbance2, // + circleY, 
-        vec3.z + disturbance1 // + circleZ
+        vec3.z + disturbance1 * 2 // + circleZ
     )
 })
 
