@@ -21,7 +21,7 @@ const modAmp = .0005 // radius // * .8 // 2
 const increment = Math.PI / 4.0
 const numOfCirclePts = 500 // 250 // 500
 const curvePts = 10000
-const material = new THREE.LineBasicMaterial( { color : 0x555555 } );
+const material = new THREE.LineBasicMaterial( { color : 0xFFFFFF } );
 let curve
 
 const modRate = Math.PI / 180
