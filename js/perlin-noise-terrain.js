@@ -182,8 +182,8 @@ terrain.position.z = -1500
 scene.add( terrain );
 
 var perlin = new Perlin();
-var peak = 400 // 60;
-var smoothing = 1 // 300;
+var peak = 200 // 60;
+var smoothing = 100 // 300;
 function refreshVertices() {
     var vertices = terrain.geometry.attributes.position.array;
     for (var i = 0; i <= vertices.length; i += 3) {
@@ -197,7 +197,7 @@ function refreshVertices() {
 }
 
 var clock = new THREE.Clock();
-var movementSpeed = 0.25 // 60;
+var movementSpeed = 60 // 0.25 // 60;
 function update() {
     var delta = clock.getDelta();
     terrain.position.z += movementSpeed * delta;
