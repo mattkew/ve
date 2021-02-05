@@ -13,7 +13,7 @@ import { VRButton } from './VRButton.js';
 document.body.appendChild( VRButton.createButton( renderer ) );
 renderer.xr.enabled = true;
 
-const circleY = 5
+const circleY = 0 // 5
 const circleZ = -5
 
 const radius = 2.5
@@ -21,7 +21,7 @@ const disturbanceAmp = radius // * .8 // 2
 const increment = 1
 const numOfCirclePoints = 250 // 500
 const curvePoints = 10000
-const material = new THREE.LineBasicMaterial( { color : 0x555555 } );
+const material = new THREE.LineBasicMaterial( { color : 0xffffff } );
 
 const timeIncrement = Math.PI / 180
 let time = 0
