@@ -174,7 +174,7 @@ light.position.set(camera.position.x, camera.position.y+4000, camera.position.z+
 scene.add(light);
 
 // Setup the terrain
-var geometry = new THREE.PlaneBufferGeometry( 200, 200, 256, 256 ); // new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 );
+var geometry = new THREE.PlaneBufferGeometry( 200, 200, 32, 32 ) // new THREE.PlaneBufferGeometry( 200, 200, 256, 256 ); // new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 );
 var material = new THREE.MeshLambertMaterial({color: Colors.TerrainColor});
 var terrain = new THREE.Mesh( geometry, material );
 terrain.rotation.x = 0 // -Math.PI / 2;
@@ -182,7 +182,7 @@ terrain.position.z = -200
 scene.add( terrain );
 
 var perlin = new Perlin();
-var peak = 10 // 60;
+var peak = 100 // 10 // 60;
 var smoothing = 1 // 300;
 function refreshVertices() {
     var vertices = terrain.geometry.attributes.position.array;
@@ -197,7 +197,7 @@ function refreshVertices() {
 }
 
 var clock = new THREE.Clock();
-var movementSpeed = 0.25 // 60;
+var movementSpeed = 0.025 // 60;
 function update() {
     var delta = clock.getDelta();
     terrain.position.z += movementSpeed * delta;
