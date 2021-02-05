@@ -178,11 +178,11 @@ var geometry = new THREE.PlaneBufferGeometry( 200, 200, 256, 256 ); // new THREE
 var material = new THREE.MeshLambertMaterial({color: Colors.TerrainColor});
 var terrain = new THREE.Mesh( geometry, material );
 terrain.rotation.x = 0 // -Math.PI / 2;
-terrain.position.z = -500
+terrain.position.z = -200
 scene.add( terrain );
 
 var perlin = new Perlin();
-var peak = 200 // 60;
+var peak = 10 // 60;
 var smoothing = 1 // 300;
 function refreshVertices() {
     var vertices = terrain.geometry.attributes.position.array;
