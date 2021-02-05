@@ -151,7 +151,7 @@ camera.position.y = 0 // 70;
 camera.position.z = 0 // 4000 // 2500; // 1000
 camera.rotation.x = 0 // -15 * Math.PI / 180;
 
-var renderer = new THREE.WebGLRenderer();
+var renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setClearColor(Colors.BackgroundColor);
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
@@ -169,21 +169,21 @@ stats.showPanel( 0 );
 document.body.appendChild( stats.dom );
 */
 
-var light = new THREE.DirectionalLight(Colors.LightColor, 1.3);
+var light = new THREE.DirectionalLight(Colors.LightColor, 1);
 light.position.set(camera.position.x, camera.position.y+4000, camera.position.z+500).normalize();
 scene.add(light);
 
 // Setup the terrain
-var geometry = new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 ); // new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 );
+var geometry = new THREE.PlaneBufferGeometry( 200, 200, 256, 256 ); // new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 );
 var material = new THREE.MeshLambertMaterial({color: Colors.TerrainColor});
 var terrain = new THREE.Mesh( geometry, material );
 terrain.rotation.x = 0 // -Math.PI / 2;
-terrain.position.z = -1500
+terrain.position.z = -500
 scene.add( terrain );
 
 var perlin = new Perlin();
 var peak = 200 // 60;
-var smoothing = 100 // 300;
+var smoothing = 1 // 300;
 function refreshVertices() {
     var vertices = terrain.geometry.attributes.position.array;
     for (var i = 0; i <= vertices.length; i += 3) {
@@ -197,7 +197,7 @@ function refreshVertices() {
 }
 
 var clock = new THREE.Clock();
-var movementSpeed = 60 // 0.25 // 60;
+var movementSpeed = 0.25 // 60;
 function update() {
     var delta = clock.getDelta();
     terrain.position.z += movementSpeed * delta;
