@@ -148,7 +148,7 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(45, width / height, 1, 3000);
 var cameraTarget = {x:0, y:0, z:0};
 camera.position.y = 0 // 70;
-camera.position.z = 2500; // 1000
+camera.position.z = 0 // 4000 // 2500; // 1000
 camera.rotation.x = 0 // -15 * Math.PI / 180;
 
 var renderer = new THREE.WebGLRenderer();
@@ -178,6 +178,7 @@ var geometry = new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 ); // new THR
 var material = new THREE.MeshLambertMaterial({color: Colors.TerrainColor});
 var terrain = new THREE.Mesh( geometry, material );
 terrain.rotation.x = 0 // -Math.PI / 2;
+terrain.position.z = -3000
 scene.add( terrain );
 
 var perlin = new Perlin();
