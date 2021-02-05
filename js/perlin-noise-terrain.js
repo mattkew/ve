@@ -205,8 +205,20 @@ function update() {
     refreshVertices();
 }
 
-function render() {
+/*
+const animate = function () {
+    renderer.setAnimationLoop( render )
+};
+
+const render = function() {
+    time = (time + timeIncrement) % Math.PI
+    generateCircle()
     renderer.render( scene, camera );
+}
+*/
+
+function render() {
+    renderer.setAnimationLoop(loop)
 }
 
 function loop() {
@@ -214,9 +226,9 @@ function loop() {
     update();
     render();
     //stats.end();
-    requestAnimationFrame(loop);
+    renderer.render( scene, camera ); // requestAnimationFrame(loop);
 }
 
-loop();
+render();
 
 
