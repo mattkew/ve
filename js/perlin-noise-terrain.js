@@ -178,7 +178,7 @@ var geometry = new THREE.PlaneBufferGeometry( 2000, 2000, 256, 256 ); // new THR
 var material = new THREE.MeshLambertMaterial({color: Colors.TerrainColor});
 var terrain = new THREE.Mesh( geometry, material );
 terrain.rotation.x = 0 // -Math.PI / 2;
-terrain.position.z = -3000
+terrain.position.z = -1500
 scene.add( terrain );
 
 var perlin = new Perlin();
