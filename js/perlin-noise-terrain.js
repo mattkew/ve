@@ -138,7 +138,7 @@ const Palette = {
 const Colors = {
     BackgroundColor: 0xeeeeee, // Palette.White,
     LightColor: Palette.White,
-    TerrainColor: 0xeeeeee // 0x999999
+    TerrainColor: 0xffffff // 0x999999
 };
 
 var width = window.innerWidth;
@@ -175,9 +175,9 @@ document.body.appendChild( stats.dom );
 
 //
 const lcolor = 0xFFFFFF;
-const lintensity = .75;
+const lintensity = .5;
 const light = new THREE.SpotLight(lcolor, lintensity);
-light.position.set(0, 300, -190);
+light.position.set(0, 600, -0);
 light.target.position.set(0, 0, -200);
 scene.add(light);
 scene.add(light.target);
@@ -186,7 +186,7 @@ scene.add(helper);
 //
 
 const color = 0xFFFFFF;
-const intensity = .9;
+const intensity = .45;
 const ambientlight = new THREE.AmbientLight(color, intensity);
 scene.add(ambientlight);
 
@@ -197,7 +197,7 @@ var geometry = new THREE.PlaneBufferGeometry( 200, 200, 32, 32 ) // new THREE.Pl
 var material = new THREE.MeshPhongMaterial( { 
     color: Colors.TerrainColor,
     // envMap: envMap, // optional environment map
-    specular: 0x050505,
+    specular: 0xffffff,
     shininess: 100
 } ) 
 
