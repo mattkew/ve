@@ -30,8 +30,9 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 
 var scene = new THREE.Scene();
+
+
 var camera = new THREE.PerspectiveCamera(45, width / height, 1, 3000);
-var cameraTarget = {x:0, y:0, z:0};
 camera.position.y = 0 // 70;
 camera.position.z = 0 // 4000 // 2500; // 1000
 camera.rotation.x = 0 // -15 * Math.PI / 180;
@@ -131,6 +132,7 @@ const render = function() {
 
 
 ///
+/*
 const effectController = {
 
     focus: 200.0,
@@ -166,7 +168,7 @@ initPostprocessing()
 postprocessing.bokeh.uniforms[ "focus" ].value = effectController.focus;
 postprocessing.bokeh.uniforms[ "aperture" ].value = effectController.aperture * 0.00001;
 postprocessing.bokeh.uniforms[ "maxblur" ].value = effectController.maxblur;
-
+*/
 ///
 
 
@@ -185,11 +187,11 @@ function loop() {
     //stats.end();
 
 //
-postprocessing.composer.render( 0.1 )
+//postprocessing.composer.render( 0.1 )
 //
 
 
-    //renderer.render( scene, camera ); // requestAnimationFrame(loop);
+    renderer.render( scene, camera ); // requestAnimationFrame(loop);
 }
 
 render();
