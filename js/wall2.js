@@ -42,7 +42,7 @@ renderer.xr.enabled = true;
 const lcolor = 0xFFFFFF;
 const lintensity = .5;
 const light = new THREE.SpotLight(lcolor, lintensity);
-light.position.set(0, 600, -0);
+light.position.set(0, 200, -0);
 light.target.position.set(0, 0, -200);
 light.castShadow = true;
 scene.add(light);
