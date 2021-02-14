@@ -10,7 +10,7 @@
 document.querySelector('button').addEventListener('click', async () => {
     //let Tone = await import('../node_modules/tone/build/Tone.js');
     await Tone.start()
-    const player = new Tone.Player("../resources/audio/vr-f-fall.mp3").toDestination();
+    const player = new Tone.Player("ve/resources/audio/vr-f-fall.mp3").toDestination();
     player.loop = true;
     player.autostart = true;
     // your page is ready to play sounds
