@@ -32,7 +32,7 @@ renderer.xr.enabled = true;
 // Fog
 {
     const near =100;
-    const far = 600;
+    const far = 300;
     const color = COLORS.LIGHT_GRAY // 'lightblue';
     scene.fog = new THREE.Fog(color, near, far);
     //scene.background = new THREE.Color(color);
@@ -42,7 +42,7 @@ renderer.xr.enabled = true;
 const lcolor = 0xFFFFFF;
 const lintensity = .5;
 const light = new THREE.SpotLight(lcolor, lintensity);
-light.position.set(0, 200, -0);
+light.position.set(0, 600, -0);
 light.target.position.set(0, 0, -200);
 light.castShadow = true;
 scene.add(light);
@@ -74,7 +74,7 @@ let wall = new THREE.Mesh( geometry, material );
 wall.castShadow = true;
 wall.receiveShadow == true
 wall.rotation.x = 0
-wall.position.y = 150
+wall.position.y = 0
 wall.lookAt(0, 0, 0)
 wall.position.z = -200
 scene.add( wall );
