@@ -32,7 +32,7 @@ renderer.xr.enabled = true;
 // Fog
 {
     const near =100;
-    const far = 300;
+    const far = 600;
     const color = COLORS.LIGHT_GRAY // 'lightblue';
     scene.fog = new THREE.Fog(color, near, far);
     //scene.background = new THREE.Color(color);
