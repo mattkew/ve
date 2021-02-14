@@ -52,7 +52,7 @@ scene.add(light.target);
 
 // Ambient Light
 const color = 0xFFFFFF;
-const intensity = .125 // .45;
+const intensity = .0125 // .45;
 const ambientlight = new THREE.AmbientLight(color, intensity);
 scene.add(ambientlight);
 
