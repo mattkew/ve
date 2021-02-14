@@ -15,3 +15,4 @@ document.querySelector('button').addEventListener('click', async () => {
     player.autostart = true;
     // your page is ready to play sounds
 })
+
