@@ -74,7 +74,7 @@ let wall = new THREE.Mesh( geometry, material );
 wall.castShadow = true;
 wall.receiveShadow == true
 wall.rotation.x = 0
-wall.position.y = 50
+wall.position.y = 150
 wall.position.z = -200
 scene.add( wall );
 
