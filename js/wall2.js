@@ -75,7 +75,7 @@ wall.castShadow = true;
 wall.receiveShadow == true
 wall.rotation.x = 0
 wall.position.y = 0
-wall.lookAt(0, 0, 0)
+//wall.lookAt(0, 0, 0)
 wall.position.z = -200
 scene.add( wall );
 
