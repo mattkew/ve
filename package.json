@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mattkew/ve#readme",
   "dependencies": {
+    "simplex-noise": "^2.4.0",
     "three": "^0.125.2"
   }
 }

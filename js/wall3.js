@@ -1,5 +1,6 @@
 import Perlin from './perlin-noise-sb.js';
 import * as THREE from "../node_modules/three/build/three.module.js"
+//import "../node_modules/simplex-noise/simplex-noise.js"
 
 const COLORS = {
     LIGHT_GRAY: 0x000000, // 0xEEEEEE,
@@ -125,7 +126,7 @@ document.querySelector('button').addEventListener('click', async () => {
     player.chain(fft, Tone.Master)
     console.log([...Array.from(Array(bands).keys())].map(index => fft.getFrequencyOfIndex(index)));
 
-    console.log("--->" + fft.getValue())
+    // console.log("--->" + fft.getValue())
 
     // your page is ready to play sounds
 
@@ -141,8 +142,6 @@ document.querySelector('button').addEventListener('click', async () => {
 
 ///////////////
 
-
-
 const pGeometry = new THREE.BufferGeometry();
 const vertices = [];
 
@@ -150,7 +149,7 @@ const textureLoader = new THREE.TextureLoader();
 
 const sprite1 = textureLoader.load( './resources/images/flare-2.png' );
 
-for ( let i = 0; i < 100; i ++ ) {
+for ( let i = 0; i < 1000; i ++ ) {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 200 - 100;
     const z = Math.random() * -200 + 100;
@@ -175,8 +174,47 @@ particles.rotation.z = Math.random() * 6;
 scene.add(particles)
 
 
+let pAmp = 100
+let pSmoothing = 2
+let x = 0
+let y = 0
+let z = 0
+
+let rx = 0
+let ry = 0
+let rz = 0
 
 
+function pRefreshVertices() {
+    let vertices = particles.geometry.attributes.position.array;
+    for (let i = 0; i <= vertices.length; i += 3) {
+        x = i
+        y = i+1
+        z = i+2
+
+        // rx = pAmp * perlin.noise(
+        //     (particles.position.y + vertices[y]) / pSmoothing, 
+        //     (zIncrement + vertices[z]) / pSmoothing
+        // );
+
+        // ry = pAmp * perlin.noise(
+        //     (particles.position.z + vertices[z]) / pSmoothing, 
+        //     (zIncrement + vertices[x]) / pSmoothing
+        // );
+
+        rz = pAmp * perlin.noise(
+            (particles.position.x + vertices[x]) / pSmoothing, 
+            (zIncrement + vertices[y]) / pSmoothing
+        );
+
+        //vertices[x] = rx
+        //vertices[y] = ry
+        vertices[z] = rz
+    }
+    particles.geometry.attributes.position.needsUpdate = true;
+    // wall.geometry.normalizeNormals();
+    particles.geometry.computeVertexNormals();
+}
 
 
 
@@ -185,20 +223,56 @@ scene.add(particles)
 
 
 function update() {
-
+    let delta = clock.getDelta();
 
     ///
-    let av = (fft !== undefined ? fft.getValue()[0] : 0) * 0.06
+    //band0DB = (fft !== undefined ? fft.getValue()[0] : 0) * 0.06
     //if(fft !== undefined) console.log("--->" + fft.getValue())
 
+    // for ( let i = 0; i < scene.children.length; i ++ ) {
+    //     const object = scene.children[ i ];
+    //     if ( object instanceof THREE.Points ) {
+    //         // object.rotation.y += (movementSpeed * delta * 0.5) * ( i < 4 ? i + 1 : - ( i + 1 ) );
+    //         //let val =
+    //         // object.position.x +=  0.125 * perlin.noise(
+    //         //     object.position.x / 0.0125,
+    //         //     clock.getElapsedTime() // d + object.position.z / 0.0125
+    //         // ) // band0DB
+
+    //         // object.position.y +=  0.125 * perlin.noise(
+    //         //     object.position.x / 0.0125,
+    //         //     clock.getElapsedTime() // d + object.position.z / 0.0125
+    //         // ) // band0DB
+
+    //         val = 0.125 * perlin.noise(
+    //             object.position.z / 0.0125,
+    //             Math.random() * 100 // d + object.position.z / 0.0125
+    //         ) // band0DB
+
+    //         console.log(i + "-> " + val)
+
+    //         object.position.z += val
+    //     }
+    // }
+
+    /*
+    vertices[i+2] = amp * perlin.noise(
+        (wall.position.x + vertices[i]) / smoothing, 
+        (zIncrement + vertices[i+1]) / smoothing
+    );
+    */
 
 
     ////
 
-    let delta = clock.getDelta();
+    
     // wall.position.z += movementSpeed * delta;
-    zIncrement = movementSpeed * delta + av; // wall.position.z += movementSpeed * delta;
+    zIncrement += movementSpeed * delta 
+    // zIncrement = movementSpeed * delta + av; // wall.position.z += movementSpeed * delta;
     refreshVertices();
+
+    pRefreshVertices()
+
     renderer.render( scene, camera );
 }
 
