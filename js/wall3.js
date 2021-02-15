@@ -78,7 +78,7 @@ wall.receiveShadow = true
 wall.rotation.x = 90 
 wall.position.y = 0 // 150
 wall.lookAt(0, 0, 0)
-wall.position.z = -200
+wall.position.z = -300
 scene.add( wall );
 
 let zIncrement = -200 // replaced wall.position.z see further down below
