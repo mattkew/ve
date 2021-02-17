@@ -135,7 +135,7 @@ function pRefreshVertices() {
 
         vertices[x] = newZ % 4
         vertices[y] = newZ % 3
-		vertices[z] = (newZ % 40) - 20
+		vertices[z] = newZ > 20 ? -20 : newZ
     }
     particles.geometry.attributes.position.needsUpdate = true;
     //particles.geometry.normalizeNormals();
