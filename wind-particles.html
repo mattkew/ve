@@ -28,7 +28,7 @@ let height = window.innerHeight;
 
 let scene = new THREE.Scene();
 
-let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10);
+let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 20); // 10
 camera.position.y = 1.6
 camera.position.z = 10 // 3
 camera.rotation.x = 0
@@ -82,10 +82,10 @@ const textureLoader = new THREE.TextureLoader();
 
 const sprite1 = textureLoader.load( './resources/images/flare-2.png' );
 
-for ( let i = 0; i < 200; i ++ ) {
+for ( let i = 0; i < 2000; i ++ ) {
     const x = Math.random() * 6 - 3;
     const y = Math.random() * 4 - 2 + 1.6;
-    const z = Math.random() * -6 + 3;
+    const z = Math.random() * -10 + 5;
     vertices.push( x, y, z );
 }
 
