@@ -105,16 +105,18 @@ scene.add(particles)
 
 
 let clock = new THREE.Clock();
-let movementSpeed = 3
+let movementSpeed = 1
 let zIncrement = 0
-let pAmp = .00125 * 4 // .1 // .00125
-const simplex = new SimplexNoise(Date.now())
-const scale = .125 // 50 // 1 // .125
+let pAmp = .00125 * 8 // .1 // .00125
+let simplex = new SimplexNoise(Date.now())
+const scale = 1 // .125 // 50 // 1 // .125
 
-let newZ = 0
+let newX, newY, newZ = 0
 
 function pRefreshVertices() {
 	let x, y, z = 0
+
+    simplex = new SimplexNoise(Date.now())
 	
     let vertices = particles.geometry.attributes.position.array;
     for (let i = 0; i <= vertices.length; i += 3) {
@@ -125,13 +127,15 @@ function pRefreshVertices() {
 		// let newX = vertices[x] + simplex.noise2D(vertices[x] * scale, zIncrement * scale) * pAmp
 		//console.log(vertices[x] + "-> " + simplex.noise2D(vertices[x] * scale, zIncrement * scale) * pAmp)
 
-        vertices[x] += simplex.noise2D(vertices[x] * scale, zIncrement + vertices[y] * scale) * pAmp
-       	vertices[y] += simplex.noise2D(vertices[y] * scale, zIncrement + vertices[z] * scale) * pAmp
-		newZ = vertices[z] + simplex.noise2D(vertices[z] * scale, zIncrement + vertices[x] * scale) * pAmp
+        newX = vertices[x] + simplex.noise2D(vertices[x] * scale, zIncrement + vertices[y] * scale) * pAmp
+        newY = vertices[y] + simplex.noise2D(vertices[y] * scale, zIncrement + vertices[z] * scale) * pAmp
+		newZ = vertices[z] + simplex.noise2D(vertices[z] * scale, zIncrement + vertices[z] * scale) * pAmp // moved for 2nd param to be z too
 
 		newZ += 0.01
 
-		vertices[z] = newZ % 25
+        vertices[x] = newZ % 4
+        vertices[y] = newZ % 3
+		vertices[z] = (newZ % 40) - 20
     }
     particles.geometry.attributes.position.needsUpdate = true;
     //particles.geometry.normalizeNormals();
@@ -142,7 +146,7 @@ function update() {
     let delta = clock.getDelta();
     
     // wall.position.z += movementSpeed * delta;
-    zIncrement += .001 // movementSpeed * delta 
+    zIncrement += movementSpeed // * delta 
 
    pRefreshVertices()
 
