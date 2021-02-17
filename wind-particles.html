@@ -107,9 +107,9 @@ scene.add(particles)
 let clock = new THREE.Clock();
 let movementSpeed = 3
 let zIncrement = 0
-let pAmp =.1 // .00125
+let pAmp = .00125 // .1 // .00125
 const simplex = new SimplexNoise(Date.now())
-const scale = 50 // 1 // .125
+const scale = .125 // 50 // 1 // .125
 
 function pRefreshVertices() {
 	let x, y, z = 0
