@@ -58,7 +58,7 @@ const intensity = 0 // .0125 // .45;
 const ambientlight = new THREE.AmbientLight(color, intensity);
 scene.add(ambientlight);
 
-let geometry = new THREE.PlaneBufferGeometry( 200, 200, 32, 32 )
+let geometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 )
 
 let material = new THREE.MeshPhongMaterial( { 
     color: 0x4f4f63, // COLORS.WHITE,
@@ -78,13 +78,13 @@ wall.receiveShadow = true
 wall.rotation.x = 90 
 wall.position.y = 0 // 150
 wall.lookAt(0, 0, 0)
-wall.position.z = -300
+wall.position.z = -10
 scene.add( wall );
 
 let zIncrement = -200 // replaced wall.position.z see further down below
 
 let perlin = new Perlin();
-let amp = 100
+let amp = 10
 let smoothing = 0.05
 function refreshVertices() {
     let vertices = wall.geometry.attributes.position.array;
@@ -150,9 +150,9 @@ const textureLoader = new THREE.TextureLoader();
 const sprite1 = textureLoader.load( './resources/images/flare-2.png' );
 
 for ( let i = 0; i < 1000; i ++ ) {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 200 - 100;
-    const z = Math.random() * -200 + 100;
+    const x = Math.random() * 10 - 5;
+    const y = Math.random() * 10 - 5;
+    const z = Math.random() * -10 + 5;
     vertices.push( x, y, z );
 }
 
@@ -160,7 +160,7 @@ pGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 
 
 //const pColor = 0xFFFFFF;
 //const sprite = sprite1;
-const size = 2;
+const size = 1;
 
 const pMaterial = new THREE.PointsMaterial( { size: size, map: sprite1, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
 material.color.setHSL( 0, 0, 100 );
