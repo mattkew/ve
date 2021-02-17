@@ -85,7 +85,7 @@ const sprite1 = textureLoader.load( './resources/images/flare-2.png' );
 for ( let i = 0; i < 2000; i ++ ) {
     const x = Math.random() * 6 - 3;
     const y = Math.random() * 4 - 2 + 1.6;
-    const z = Math.random() * -10 + 5;
+    const z = Math.random() * -50 + 25;
     vertices.push( x, y, z );
 }
 
@@ -107,9 +107,11 @@ scene.add(particles)
 let clock = new THREE.Clock();
 let movementSpeed = 3
 let zIncrement = 0
-let pAmp = .00125 // .1 // .00125
+let pAmp = .00125 * 4 // .1 // .00125
 const simplex = new SimplexNoise(Date.now())
 const scale = .125 // 50 // 1 // .125
+
+let newZ = 0
 
 function pRefreshVertices() {
 	let x, y, z = 0
@@ -125,7 +127,11 @@ function pRefreshVertices() {
 
         vertices[x] += simplex.noise2D(vertices[x] * scale, zIncrement + vertices[y] * scale) * pAmp
        	vertices[y] += simplex.noise2D(vertices[y] * scale, zIncrement + vertices[z] * scale) * pAmp
-        vertices[z] += simplex.noise2D(vertices[z] * scale, zIncrement + vertices[x] * scale) * pAmp
+		newZ = vertices[z] + simplex.noise2D(vertices[z] * scale, zIncrement + vertices[x] * scale) * pAmp
+
+		newZ += 0.01
+
+		vertices[z] = newZ % 25
     }
     particles.geometry.attributes.position.needsUpdate = true;
     //particles.geometry.normalizeNormals();
