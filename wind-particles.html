@@ -18,6 +18,8 @@ import "./node_modules/simplex-noise/simplex-noise.js"
 import * as THREE from "./node_modules/three/build/three.module.js"
 //import "../node_modules/simplex-noise/simplex-noise.js"
 
+import { GUI } from './node_modules/three/examples/jsm/libs/dat.gui.module.js'
+
 const COLORS = {
     LIGHT_GRAY: 0x000000, // 0xEEEEEE,
     WHITE:  0xFFFFFF
@@ -82,7 +84,7 @@ const textureLoader = new THREE.TextureLoader();
 
 const sprite1 = textureLoader.load( './resources/images/flare-2.png' );
 
-for ( let i = 0; i < 2000; i ++ ) {
+for ( let i = 0; i < 60; i ++ ) {
     const x = Math.random() * 6 - 3;
     const y = Math.random() * 4 - 2 + 1.6;
     const z = Math.random() * -50 + 25;
@@ -95,7 +97,20 @@ pGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 
 //const sprite = sprite1;
 const size = 1;
 
+
 const pMaterial = new THREE.PointsMaterial( { size: size, map: sprite1, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
+// const pMaterial  = new THREE.MeshPhongMaterial( { 
+//     color: 0xFFFFFF, // COLORS.WHITE,
+//     // envMap: envMap, // optional environment map
+//     specular: 0xffffff,
+//     //shininess: 100,
+//     reflectivity: 1,
+//     //flatShading: true, 
+//     //receiveShadow: true,
+//     //castShadow: true,
+//     wireframe: true
+// } ) 
+
 pMaterial.color.setHSL( 0, 0, 100 );
 
 const particles = new THREE.Points( pGeometry, pMaterial );
@@ -105,16 +120,53 @@ scene.add(particles)
 
 
 let clock = new THREE.Clock();
-let movementSpeed = 3 * 4
-let zIncrement = 0
-let pAmp = .00125 * 4 // .1 // .00125
-const simplex = new SimplexNoise(Date.now())
-const scale = 2 // .125 // 50 // 1 // .125
 
-let newZ = 0
-let zPull = 0.005
+
+let wind = {
+	scale: -.9, // 2,
+	pAmp: .001, // .00125 * 4,
+	movementSpeed: 3 * 4,
+	zIncrement: 0.1,
+	zPull: 0.0003 // 0.005
+}
+
+
+var gui = new GUI();
+var windUI = gui.addFolder('Wind');
+windUI.add(wind, 'scale', -1, 1 ).listen();
+windUI.add(wind, 'pAmp', 0, .01 ).listen();
+windUI.add(wind, 'movementSpeed', -1, 1 ).listen();
+windUI.add(wind, 'zIncrement', 0, 10.0001 ).listen();
+windUI.add(wind, 'zPull', 0, .005 ).listen();
+
+
+// const gui = new GUI()
+// const cubeFolder = gui.addFolder("Wind")
+// cubeFolder.add(movementSpeed, "x", 0, Math.PI * 2, 0.01)
+// cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2, 0.01)
+// cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2, 0.01)
+// cubeFolder.open()
+// const cameraFolder = gui.addFolder("Camera")
+// cameraFolder.add(camera.position, "z", 0, 10, 0.01)
+// cameraFolder.open()
+
+const simplex = new SimplexNoise(Date.now())
+//const simplex2 = new SimplexNoise(Math.random())
+
 
 function pRefreshVertices() {
+
+	let movementSpeed = wind.movementSpeed
+	let zIncrement = wind.zIncrement
+	let pAmp = wind.pAmp
+	//const simplex = new SimplexNoise(Date.now())
+	let scale = wind.scale // .125 // 50 // 1 // .125
+
+	let newZ = 0
+	let zPull = wind.zPull
+
+
+
 	let x, y, z = 0
 	
     let vertices = particles.geometry.attributes.position.array;
@@ -128,10 +180,9 @@ function pRefreshVertices() {
 
         vertices[x] += simplex.noise2D(vertices[x] * scale, zIncrement + vertices[y] * scale) * pAmp
        	vertices[y] += simplex.noise2D(vertices[y] * scale, zIncrement + vertices[z] * scale) * pAmp
-		newZ = vertices[z] + simplex.noise2D(vertices[z] * scale, zIncrement + vertices[x] * scale) * pAmp
 
+		newZ = vertices[z] // + simplex.noise2D(vertices[z] * scale, zIncrement + vertices[x] * scale) * pAmp
 		newZ += zPull
-
 		vertices[z] = newZ % 25
     }
     particles.geometry.attributes.position.needsUpdate = true;
@@ -143,7 +194,7 @@ function update() {
     let delta = clock.getDelta();
     
     // wall.position.z += movementSpeed * delta;
-    zIncrement += .001 // movementSpeed * delta 
+    wind.zIncrement += .001 // movementSpeed * delta 
 
    pRefreshVertices()
 

@@ -13,10 +13,10 @@ import { VRButton } from './VRButton.js';
 document.body.appendChild( VRButton.createButton( renderer ) );
 renderer.xr.enabled = true;
 
-const circleY = 0 // 5
-const circleZ = -5
+const circleY = .25 // 5
+const circleZ = -.5
 
-const radius = 2.5
+const radius = .25 // 2.5
 const disturbanceAmp = radius // * .8 // 2
 const increment = 1
 const numOfCirclePoints = 250 // 500
@@ -58,9 +58,11 @@ const animate = function () {
 
 const render = function() {
     time = (time + timeIncrement) % Math.PI
-    generateCircle()
+    // generateCircle()
     renderer.render( scene, camera );
 }
+
+generateCircle()
 
 animate();
 
