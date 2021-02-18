@@ -105,13 +105,14 @@ scene.add(particles)
 
 
 let clock = new THREE.Clock();
-let movementSpeed = 3
+let movementSpeed = 3 * 4
 let zIncrement = 0
 let pAmp = .00125 * 4 // .1 // .00125
 const simplex = new SimplexNoise(Date.now())
-const scale = .125 // 50 // 1 // .125
+const scale = 2 // .125 // 50 // 1 // .125
 
 let newZ = 0
+let zPull = 0.005
 
 function pRefreshVertices() {
 	let x, y, z = 0
@@ -129,7 +130,7 @@ function pRefreshVertices() {
        	vertices[y] += simplex.noise2D(vertices[y] * scale, zIncrement + vertices[z] * scale) * pAmp
 		newZ = vertices[z] + simplex.noise2D(vertices[z] * scale, zIncrement + vertices[x] * scale) * pAmp
 
-		newZ += 0.01
+		newZ += zPull
 
 		vertices[z] = newZ % 25
     }
